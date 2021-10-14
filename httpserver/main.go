@@ -13,7 +13,7 @@ import (
 
 func main() {
 	var port int
-	flag.IntVar(&port, "port", 8080, "服务端口")
+	flag.IntVar(&port, "port", 80, "服务端口")
 	log.Printf("serving at %s\n", ":"+strconv.Itoa(port))
 
 	mux := http.NewServeMux()
@@ -64,9 +64,9 @@ func (rw *responseWriter) WriteHeader(code int) {
 
 func middleware(handler http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		rw := &responseWriter {
+		rw := &responseWriter{
 			ResponseWriter: w,
-			StatusCode: 200,
+			StatusCode:     200,
 		}
 
 		defer func() {
